@@ -1,0 +1,47 @@
+#I copypasted this file hoping for the best, will clean it up later on
+
+
+# .gitignore
+
+# Python
+*.pyc
+*.pyo
+__pycache__/
+*.pyc
+
+# Virtual Environment
+vEnv/
+
+# IDE settings
+.idea/
+
+# Database
+*.sqlite3
+
+# Compiled Python files
+*.pyc
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
