@@ -11,7 +11,7 @@ __pycache__/
 
 
 # Ignore Django migration files
-/migrations/
+core/migrations/
 # Virtual Environment
 vEnv/
 
