@@ -1,0 +1,24 @@
+{% extends 'base.html'%} 
+
+{% block page_content%}
+<h2>Threads:</h2>
+    <ul>
+        {% for thread in threads %}
+            <div class ="Thread">
+                <strong>{{ thread.title }}</strong> - {{ thread.created_at }}<br>
+                <p>{{ thread.content }}</p>
+
+                {% if thread.post_set.all %}
+                    <h3>Replies:</h3>
+                    <ul>
+                        {% for post in thread.post_set.all %}
+                            <li>
+                                <strong>{{ post.username }}</strong> - {{ post.created_at }}<br>
+                                <p>{{ post.content }}</p>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+        {% endfor %}
+{% endblock page_content%}

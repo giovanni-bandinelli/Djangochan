@@ -1,0 +1,18 @@
+<!-- root/core_app/templates/core_app(once again)/home.html  why are we using this project structure? Im not sure...-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DjangoChan</title>
+</head>
+<body>
+    <h1>Boards:</h1>
+    <ul>
+        {% for board in boards %}
+            <li><a href="{% url 'board_page' board.name %}">{{ board.name }}</a></li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
