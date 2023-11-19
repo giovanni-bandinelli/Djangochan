@@ -1,18 +1,66 @@
-<!-- root/core_app/templates/core_app(once again)/home.html  why are we using this project structure? Im not sure...-->
+{% extends 'base.html' %}
+{% load static %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DjangoChan</title>
-</head>
-<body>
-    <h1>Boards:</h1>
-    <ul>
+{% block custom_styles %}
+<style>
+    .container {
+        display: grid;
+        grid-template-columns: 1fr; 
+        gap: 10px;
+        padding: 10px;
+        margin: auto;
+        max-width: 600px; 
+    }
+
+    .box {
+        border: 1px solid #ccc;
+        border-color: #ffb703;
+        margin-bottom: 20px;
+    }
+
+    .box-bar {
+        color: #27233a;
+        background-color: #ffb703;
+        margin: 0;
+        padding: 10px;
+        font-weight: bold;
+    }
+
+    .box-text {
+        margin: 10px; /* Corrected class name */
+    }
+</style>
+{% endblock custom_styles %}
+
+{% block page_content %}
+<div class="container">
+    <img src="{% static 'core/DjangoChan.svg' %}" alt="DjangoChanLogo">
+    <div class="box">
+        <div class="box-bar">What is DjangoChan?</div>
+        <div class="box-text">
+            DjangoChan is a simple image-based bulletin board where anyone can post comments and share images.
+            Its aim is to be a *chan webapp with a modern look and feel but I'm clearly failing so I'll try <br>
+            to have it be at least a functional prototype first lol.
+        </div>
+    </div>
+
+    <div class="box">
+        <div class="box-bar">Boards:</div>
+        
         {% for board in boards %}
-            <li><a href="{% url 'board_page' board.name %}">{{ board.name }}</a></li>
+        <!--It would probably make more sense to add them hardcoded to keep them more organized-->
+        <button><a href="{% url 'board_page' board.name %}">{{ board.name }}</a></button>
         {% endfor %}
-    </ul>
-</body>
-</html>
+    </div>
+
+    <div class="box">
+        <div class="box-bar">Popular threads:</div>
+        Ancora da implementare
+    </div>  
+    
+    <div class="box">
+        <div class="box-bar">Stats(Da implementare)</div>
+        <div clas="box-text">Total Threads & Posts created:123  Active Content: 15GB</div>
+    </div>              
+</div>
+{% endblock page_content %}

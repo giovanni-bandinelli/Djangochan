@@ -1,0 +1,102 @@
+{% extends 'base.html'%} 
+
+{% block custom_styles %}
+<style>
+    div{
+        10px
+    }
+    .navbar-btn {
+        margin-right: 10px;
+        margin-left: 10px;
+    }
+    .new-thread-button {
+        text-align: center;
+        margin: 10px 0; 
+    }
+    .post-container {
+        width: 50%;
+        margin-left: 5%;
+    }
+    .post {
+        background-color: #282a2e;
+        border: 1px solid #282a2e;
+        padding: 10px;
+        padding-right: 25px;
+        margin-bottom: 10px;
+        margin-left: 5%;
+        border-radius: 7px / 7px;
+        display: inline-block;
+        max-width: 100%; 
+        box-sizing: border-box; 
+    }
+    
+    
+    .info {
+        display: flex;
+        align-items: center;
+    }
+    .info > div{
+        margin-right: 10px;
+    }
+    .username{
+        color:#64b748;
+        font-weight: bold;
+    }
+    .title{
+        color:#b298dc;
+        font-weight: bold;
+    }
+</style>
+{% endblock custom_styles %}
+
+
+
+{% block page_content%}
+
+<header>
+<nav class="navbar navbar-dark bg-dark">
+    {%for board in boards%}<a href="{% url 'board_page' board.name %}">
+      <button class="navbar-btn">{{board.name}}</button>
+    </a>
+    {%endfor%}
+    <a href="{% url 'homepage' %}">
+        <button class="navbar-btn">Home</button>
+    </a>
+    <a href="#">
+        <button class="navbar-btn">Login or register</button>
+    </a>
+  </nav>
+<header>
+
+
+<p>{{board.description}}</p>
+<div class="new-thread-button">[Create Thread]</div>
+
+<hr>
+    {% block thread_section%}
+        {% for thread in threads %}
+            <div class ="thread">
+                <div class = "info">
+                    <div class="title">{{ thread.title }}</div><div class="username">{{ thread.username }}</div> date: {{ thread.created_at }} >>n°{{thread.id}}
+                </div>
+                <div class ="content"><p>{{ thread.content }}<p></div>
+
+                {% if thread.post_set.all %}
+                        {% for post in thread.post_set.all %}
+                        <div class="post-container">
+                            <div class = "post">
+                                    <div class="info">
+                                    <div class = "username">{{ post.username }}</div> - {{ post.created_at }} >>n°{{post.id}}<br>
+                                    </div>
+                                    <div class="content"><p>{{ post.content }}</p></div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    
+                {% endif %}
+            </div>
+            <hr>
+        {% endfor %}
+    {% endblock thread_section%}
+{% endblock page_content%}
+
