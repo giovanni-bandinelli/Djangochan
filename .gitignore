@@ -11,6 +11,7 @@ __pycache__/
 
 #Ignore static files 
 /static/
+/core/static/
 
 # Ignore Django migration files
 core/migrations/
