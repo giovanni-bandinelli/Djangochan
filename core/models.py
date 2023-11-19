@@ -9,9 +9,9 @@ class Board(models.Model):
 
 class Thread(models.Model):
     board = models.ForeignKey(Board, on_delete=models.CASCADE)
-    title = models.CharField(max_length=100)
+    title = models.CharField(max_length=100, blank=True)
     username = models.CharField(max_length=50, default='anonymous')
-    content = models.TextField()
+    content = models.TextField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     #is_pinned = models.BooleanField(default=False)
     def __str__(self):
@@ -21,7 +21,7 @@ class Thread(models.Model):
 class Post(models.Model):
     thread = models.ForeignKey(Thread, on_delete=models.CASCADE)
     username = models.CharField(max_length=255, default='anonymous')
-    content = models.TextField()
+    content = models.TextField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
    # is_op = models.BooleanField(default=False)
     def __str__(self):
