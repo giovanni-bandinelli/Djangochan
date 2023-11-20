@@ -12,7 +12,8 @@ __pycache__/
 #Ignore static files 
 /static/
 /core/static/
-
+#ignore media
+/uploads/
 # Ignore Django migration files
 core/migrations/
 # Virtual Environment
