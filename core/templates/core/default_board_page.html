@@ -76,6 +76,12 @@
     {% block thread_section%}
         {% for thread in threads %}
             <div class ="thread">
+                
+            {% if thread.file_uploaded %}
+                <div class ="file">
+                    <img src="{{ thread.file_uploaded.url }}" alt="Thread Image" style="max-width: 100%;">
+                </div>
+            {% endif %}
                 <div class = "info">
                     <div class="title">{{ thread.title }}</div><div class="username">{{ thread.username }}</div> date: {{ thread.created_at }} >>n°{{thread.id}}
                 </div>
