@@ -2,9 +2,6 @@
 
 {% block custom_styles %}
 <style>
-    div{
-        10px
-    }
     .navbar-btn {
         margin-right: 10px;
         margin-left: 10px;
@@ -13,9 +10,13 @@
         text-align: center;
         margin: 10px 0; 
     }
+    .thread{
+        padding:15px;
+    }
     .post-container {
-        width: 50%;
+        display:inline-block;
         margin-left: 5%;
+        width:50%;
     }
     .post {
         background-color: #282a2e;
@@ -29,7 +30,6 @@
         max-width: 100%; 
         box-sizing: border-box; 
     }
-    
     
     .info {
         display: flex;
@@ -46,63 +46,106 @@
         color:#b298dc;
         font-weight: bold;
     }
+
+    /* Css code to manage image(jpeg,png,gif) rendering & resizing */
+    .media-image {
+        float: left;
+        margin-right:15px;
+        margin-bottom:15px;
+        max-width: 33%;
+        cursor: pointer;
+    }
+    .media-image.expanded {
+        max-width: 100%;
+    }
 </style>
 {% endblock custom_styles %}
-
-
 
 {% block page_content%}
 
 <header>
-<nav class="navbar navbar-dark bg-dark">
-    {%for board in boards%}<a href="{% url 'board_page' board.name %}">
-      <button class="navbar-btn">{{board.name}}</button>
-    </a>
-    {%endfor%}
-    <a href="{% url 'homepage' %}">
-        <button class="navbar-btn">Home</button>
-    </a>
-    <a href="#">
-        <button class="navbar-btn">Login or register</button>
-    </a>
-  </nav>
-<header>
+    <nav class="navbar navbar-dark bg-dark">
+        {% for board in boards %}
+            <a href="{% url 'board_page' board.name %}">
+                <button class="navbar-btn">{{ board.name }}</button>
+            </a>
+        {% endfor %}
+        <a href="{% url 'homepage' %}">
+            <button class="navbar-btn">Home</button>
+        </a>
+        <a href="#">
+            <button class="navbar-btn">Login or register</button>
+        </a>
+    </nav>
+</header>
 
+<p>{{ board.description }}</p>
 
-<p>{{board.description}}</p>
-<div class="new-thread-button">[Create Thread]</div>
-
+    <div class="new-thread-form">
+  
+    </div>
 <hr>
-    {% block thread_section%}
-        {% for thread in threads %}
-            <div class ="thread">
-                
+
+{% block thread_section %}
+    {% for thread in threads %}
+        <div class="thread">
             {% if thread.file_uploaded %}
-                <div class ="file">
-                    <img src="{{ thread.file_uploaded.url }}" alt="Thread Image" style="max-width: 100%;">
+                <div class="file">
+                    <div class="media-container">
+                        <img class="media-image" src="{{ thread.file_uploaded.url }}" alt="Thread Image"
+                            onclick="toggleImage(this)">
+                    </div>
                 </div>
             {% endif %}
-                <div class = "info">
-                    <div class="title">{{ thread.title }}</div><div class="username">{{ thread.username }}</div> date: {{ thread.created_at }} >>n°{{thread.id}}
-                </div>
-                <div class ="content"><p>{{ thread.content }}<p></div>
+            <div class="info">
+                <div class="title">{{ thread.title }}</div>
+                <div class="username">{{ thread.username }}</div> date: {{ thread.created_at|date:"(D) d/m/Y H:i" }}
+                No.{{ thread.id }}
+            </div>
+            <div class="content">
+                <p>{{ thread.content }}</p>
+            </div>
 
-                {% if thread.post_set.all %}
-                        {% for post in thread.post_set.all %}
-                        <div class="post-container">
-                            <div class = "post">
-                                    <div class="info">
-                                    <div class = "username">{{ post.username }}</div> - {{ post.created_at }} >>n°{{post.id}}<br>
+            {% if thread.post_set.all %}
+                {% for post in thread.post_set.all %}
+                    <div class="post-container">
+                        <div class="post">
+                            {% if post.file_uploaded %}
+                                <div class="file">
+                                    <div class="media-container">
+                                        <img class="media-image" src="{{ post.file_uploaded.url }}"
+                                            onclick="toggleImage(this)" alt="Post Image">
                                     </div>
-                                    <div class="content"><p>{{ post.content }}</p></div>
+                                </div>
+                            {% endif %}
+                            <div class="info">
+                                <div class="username">{{ post.username }}</div> {{ thread.created_at|date:"(D) d/m/Y H:i" }}
+                                No.{{ post.id }}<br>
+                            </div>
+                            <div class="content">
+                                <p>{{ post.content }}</p>
                             </div>
                         </div>
-                        {% endfor %}
-                    
-                {% endif %}
-            </div>
-            <hr>
-        {% endfor %}
-    {% endblock thread_section%}
-{% endblock page_content%}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+        <hr>
+    {% endfor %}
+{% endblock thread_section %}
 
+{% block custom_js %}
+<!-- Function to shrink/expand images on click -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const imageContainers = document.querySelectorAll('.media-image');
+    
+            imageContainers.forEach(container => {
+                container.addEventListener('click', function () {
+                    this.classList.toggle('expanded');
+                });
+            });
+        });
+    </script>
+{% endblock custom_js %}
+{% endblock page_content %}

@@ -12,7 +12,7 @@ STATICFILES_DIRS = [
     BASE_DIR/'core/static'
 ]
 
-#user uploaded files
+#user uploaded static files
 MEDIA_ROOT = BASE_DIR / "uploads/"
 MEDIA_URL = "media/"
 
