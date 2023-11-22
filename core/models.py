@@ -16,7 +16,7 @@ class Thread(models.Model):
     file_uploaded = models.FileField(upload_to='thread_media', null=True, blank=True)
     #is_pinned = models.BooleanField(default=False)
     def __str__(self):
-        return f"{self.title} - {self.created_at}"
+        return f"{self.id}     {self.title} - {self.created_at}"
 
   
 class Post(models.Model):
