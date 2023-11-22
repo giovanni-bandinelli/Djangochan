@@ -1,0 +1,21 @@
+{% for post in thread.post_set.all %}
+    <div class="post-container">
+        <div class="post">
+            {% if post.file_uploaded %}
+                <div class="file">
+                    <div class="media-container">
+                        <img class="media-image" src="{{ post.file_uploaded.url }}"
+                            onclick="toggleImage(this)" alt="Post Image">
+                    </div>
+                </div>
+            {% endif %}
+            <div class="info">
+                <span class="username">{{ post.username }}</span> {{ thread.created_at|date:"(D) d/m/Y H:i" }}
+                No.{{ post.id }}<br>
+            </div>
+            <div class="content">
+                <p>{{ post.content }}</p>
+            </div>
+        </div>
+    </div>
+{% endfor %}

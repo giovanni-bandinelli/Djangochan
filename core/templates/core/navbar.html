@@ -1,0 +1,13 @@
+<nav class="navbar navbar-dark bg-dark">
+    {% for board in boards %}
+        <a href="{% url 'board_page' board.name %}">
+            <button class="navbar-btn">{{ board.name }}</button>
+        </a>
+    {% endfor %}
+    <a href="{% url 'homepage' %}">
+        <button class="navbar-btn">Home</button>
+    </a>
+    <a href="#">
+        <button class="navbar-btn">Login or register</button>
+    </a>
+</nav>

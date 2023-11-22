@@ -1,0 +1,11 @@
+
+<div class="info">
+    <span class="title">{{ thread.title }}</span>
+    <span class="username">{{ thread.username }}</span>
+    <span class="timestamp"> date: {{ thread.created_at|date:"(D) d/m/Y H:i" }}</span>
+    <span class="thread_id">No.{{ thread.id }}</span>
+    
+</div>
+<div class="content">
+    <p>{{ thread.content }}</p>
+</div>
