@@ -11,5 +11,5 @@ class ThreadForm(forms.ModelForm):
 class PostForm(forms.ModelForm):
     password_delete = forms.CharField(widget=forms.PasswordInput, required=False)
     class Meta:
-        model = Thread
-        fields = ['content', 'username', 'password_delete', 'file_uploaded']
+        model = Post
+        fields = ['thread','content', 'username', 'password_delete', 'file_uploaded']
