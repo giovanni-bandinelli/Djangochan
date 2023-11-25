@@ -1,0 +1,27 @@
+{% extends './board_page_scroll.html'%} 
+
+{% block board_layout_style%}
+    {{block.super}}
+{% endblock board_layout_style%}
+{% block thread_section_menu%}
+    <a href="{% url 'board_page' board.name %}">
+        Scroll mode
+    </a>][
+    <a href="{% url 'board_page_cat' board.name %}">
+        Catalog mode
+    </a>]
+{% endblock thread_section_menu%}
+{% block thread_section %}
+{% block custom_js %}
+    <!-- Function to shrink/expand images on click -->
+    <script>
+        function toggleImage(element) {
+            element.classList.toggle('expanded');
+        }
+    </script>
+{% endblock custom_js %}
+<div class="thread">
+    {% include "./thread_infos.html" %}
+</div>
+<hr>
+{% endblock thread_section %}

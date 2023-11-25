@@ -1,4 +1,5 @@
 <!-- templates/base.html -->
+{% load static %} 
 
 <!DOCTYPE html>
 <html lang="en">
@@ -14,12 +15,20 @@
             background-color: #1D1F21;
             box-sizing: border-box;
         }
+        a{
+            color: #64b748;
+        }
+        a:hover{
+            color: #FFE37A;
+        }
     </style>
-
-   
-    {% block custom_styles %}{% endblock custom_styles %}
+    {% block home_style%}
+    {% endblock home_style%}<!--this solution is in way the recommended approach bruh-->
+    {% block board_layout_style%}<!--this solution is in way the recommended approach bruh-->
+    {% endblock board_layout_style%}
 </head>
 <body>
-{% block page_content %}{% endblock page_content %}
+    {% block page_content %}
+    {% endblock page_content %}
 </body>
 </html>

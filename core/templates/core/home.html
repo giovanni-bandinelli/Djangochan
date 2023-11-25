@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
-{% load static %}
+{% load static %}<!--to load logo-->
 
-{% block custom_styles %}
+{% block home_style%}
 <style>
     .container {
         display: grid;
@@ -14,23 +14,23 @@
 
     .box {
         border: 1px solid #ccc;
-        border-color: #b298dc;
+        border-color: #64b748;
         margin-bottom: 20px;
     }
 
     .box-bar {
         color: #27233a;
-        background-color: #b298dc;
+        background-color: #64b748;
         margin: 0;
         padding: 10px;
         font-weight: bold;
     }
 
     .box-text {
-        margin: 10px; /* Corrected class name */
+        margin: 15px; 
     }
 </style>
-{% endblock custom_styles %}
+{% endblock home_style%}
 
 {% block page_content %}
 <div class="container">
@@ -46,11 +46,12 @@
 
     <div class="box">
         <div class="box-bar">Boards:</div>
-        
+        <div class="box-text">
         {% for board in boards %}
         <!--It would probably make more sense to add them hardcoded to keep them more organized-->
-        <button><a href="{% url 'board_page' board.name %}">{{ board.name }}</a></button>
+            <a href="{% url 'board_page' board.name %}">{{ board.name }}</a><br>
         {% endfor %}
+        </div>
     </div>
 
     <div class="box">

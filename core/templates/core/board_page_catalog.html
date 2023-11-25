@@ -1,0 +1,52 @@
+{% extends './board_page_scroll.html' %}
+
+{% block board_layout_style%}
+<style>
+    .thread-section {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        margin-left: 100px;
+        margin-right: 100px;
+    }
+    .thread {
+        box-sizing: border-box;
+        min-width: 200px; 
+        max-width: 30%;
+        
+        padding: 10px;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+    .thumbnail {
+        max-width:80%;
+        max-height:80%;
+    }
+</style>
+{% endblock board_layout_style%}
+
+
+<!--html before is identical to the scrollmode-->
+{% block thread_section_menu %}[
+    <a href="{% url 'board_page' board.name %}">
+        Scroll mode
+    </a>]
+    Sort by: <select id="order-ctrl" size="1"><option value="alt"> Creation date</option><option value="alt"> Last reply</option><option value="alt"> Reply Count</option></select>
+{% endblock thread_section_menu %}
+{% block thread_section %}
+    <div class="thread-section">
+        {% for thread in threads %}
+            <div class="thread">
+                {% if thread.file_uploaded %}
+                <a href="{% url 'single_thread' board.name thread.id %}"><img class="thumbnail" src="{{ thread.file_uploaded.url }}" alt="Thread Thumbnail"></a>
+                {% endif %}
+                <div class="thread-stats" title="(R)eplies & (I)mages">R:<b>{{ thread.num_replies}}</b>    I:<b>{{thread.num_images}}</b></div>
+                <div class="teaser"><b>{{thread.title}}:</b>{{thread.content}}</div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock thread_section %}
+
+
+
+

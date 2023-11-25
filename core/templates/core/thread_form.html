@@ -1,21 +1,27 @@
 
-
+<style>
+    .thread_form{
+        margin-left:auto;
+        margin-right:auto;
+        max-width: 100vh;
+        min-width: 33%;
+    }
+</style>
 
 <form method="post" enctype="multipart/form-data" class="thread_form">
+    <h2>        Start a new Thread </h2>
     {% csrf_token %}
     <table>
         <input type="hidden" name="board" value="{{ board }}">
+        
         <tr>
             <td><label for="{{ form.username.id_for_label }}">Username:</label></td>
             <td>{{ form.username }}</td>
         </tr>
         <tr>
             <td><label for="{{ form.title.id_for_label }}">Title:</label></td>
-            <td>{{ form.title }}</td>
+            <td>{{ form.title }} <input type="submit" value="Post"></td></td> <td colspan="2">
         </tr>
-        <tr>
-            <td colspan="2"><input type="submit" value="Post"></td>
-          </tr>
         <tr>
             <td><label for="{{ form.content.id_for_label }}">Comment:</label></td>
             <td>{{ form.content }}</td>

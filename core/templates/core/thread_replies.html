@@ -10,8 +10,9 @@
                 </div>
             {% endif %}
             <div class="info">
-                <span class="username">{{ post.username }}</span> {{ thread.created_at|date:"(D) d/m/Y H:i" }}
-                No.{{ post.id }}<br>
+                <span class="username">{{ post.username }}</span> 
+                <span class="timestamp">{{ post.created_at|date:"(D) d/m/Y H:i" }}</span>
+                <span class="quick_reply"><a href="{% url 'single_thread' board.name thread.id %}">No.{{ post.id }}</a></span><br>
             </div>
             <div class="content">
                 <p>{{ post.content }}</p>
