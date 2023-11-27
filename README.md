@@ -20,10 +20,11 @@ git clone https://github.com/giovanni-bandinelli/DjangoChan.git
 **Note:** Some directories ( './static' at root level '.static/core' inside 'core' app) are specified in the `.gitignore` file and will not be included when you clone the repository
 
 2.**Create and activate a python virtual enviroment**
+
 I called mine 'vEnv', remember to change the .gitignore accordingly 
-'''bash
+```bash
 python -m venv vEnv
-'''
+```
 
 3.**Add requirements**
 ```bash
@@ -46,7 +47,9 @@ After completing the installation,open a terminal inside of the project's direct
 python manage.py runserver
 ```
 et voilà
+
 **reminder**
+
 This repository is still in development stage, Work on deployment mode hasn't started yet 
 ## Contributing 
 At the moment I want this to be a solo project and no contributions will be accepted
