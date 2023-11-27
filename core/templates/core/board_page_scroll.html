@@ -58,11 +58,10 @@
         {% include "./navbar.html" %}
     </header>
 
-    <p>{{ board.title }}</p>
-
-    {% include "./thread_form.html" %}
-    <hr>
-
+    {% block form_section %}
+        {% include "./thread_form.html" %}
+        <hr>
+    {% endblock form_section %}
 
     {% block thread_section_menu %}
         [<a href="{% url 'board_page_cat' board.name %}">

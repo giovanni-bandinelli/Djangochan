@@ -3,6 +3,10 @@
 {% block board_layout_style%}
     {{block.super}}
 {% endblock board_layout_style%}
+
+{% block form_section%}
+    {% include './post_form.html'%}
+{% endblock form_section%}
 {% block thread_section_menu%}
     <a href="{% url 'board_page' board.name %}">
         Scroll mode
@@ -10,6 +14,7 @@
     <a href="{% url 'board_page_cat' board.name %}">
         Catalog mode
     </a>]
+
 {% endblock thread_section_menu%}
 {% block thread_section %}
 {% block custom_js %}
