@@ -36,8 +36,8 @@ def board_page_catalog(request, board_name):
     boards = Board.objects.all()
     board = Board.objects.get(name=board_name)
     threads = Thread.objects.filter(board=board).annotate(
-        num_replies=Count('post'),
-        num_images=Count('post__file_uploaded', distinct=True)
+        num_replies=Count('posts'),
+        num_images=Count('posts__file_uploaded', distinct=True)
     )
 
     if request.method == 'POST':

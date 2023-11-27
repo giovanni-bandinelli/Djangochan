@@ -16,8 +16,8 @@
     </div>
     <div class="content">
         <p>{{ thread.content }}</p>
-        {% if thread.post_set.all %}
-            {%include "./thread_replies.html"%}
+        {% if thread.posts.all %}
+            {% include "./thread_replies.html" %}
         {% endif %}
     </div>
 </div>
