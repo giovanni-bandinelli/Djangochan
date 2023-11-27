@@ -3,21 +3,24 @@
 
 # .gitignore
 
+#***to use only in development mode***
+#Ignore static files, needed to store css,and images used by the website(favicons,logos etc)
+/static/
+/core/static/               
+#ignore media, stores user uploaded files should be created automatically when succesfully starting a new Thread or adding a Post
+/uploads/
+
+# Ignore Django migration files, should be created automatically after running migrations for the first time
+core/migrations/
+# Virtual Environment
+vEnv/
+
 # Python
 *.pyc
 *.pyo
 __pycache__/
 *.pyc
 
-#Ignore static files 
-/static/
-/core/static/
-#ignore media
-/uploads/
-# Ignore Django migration files
-core/migrations/
-# Virtual Environment
-vEnv/
 
 # IDE settings
 .idea/
