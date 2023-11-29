@@ -15,8 +15,6 @@
     <h2>Add Reply to thread No.{{thread.id}}</h2>
     {% csrf_token %}
     <table>
-        <input type="hidden" name="board" value="{{ board }}">
-        
         <tr>
             <td><label for="{{ form.username.id_for_label }}">Username:</label></td>
             <td>{{ form.username }}<input type="submit" value="Post"></td>

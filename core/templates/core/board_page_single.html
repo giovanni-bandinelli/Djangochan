@@ -8,7 +8,7 @@
     {% include './post_form.html'%}
 {% endblock form_section%}
 {% block thread_section_menu%}
-    <a href="{% url 'board_page' board.name %}">
+    [<a href="{% url 'board_page' board.name %}">
         Scroll mode
     </a>][
     <a href="{% url 'board_page_cat' board.name %}">
