@@ -5,7 +5,8 @@ An Anonymous Imageboard with Django, probably going to be a 4chan clone.
 1. [Installation](#installation)
 2. [Usage](#usage)
 3. [Contributing](#contributing)
-4. [License](#license)
+4. [To-do](#to-do)
+5. [License](#license)
    
 
 ## Installation
