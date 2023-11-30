@@ -31,9 +31,24 @@
     <a href="{% url 'board_page' board.name %}">
         Scroll mode
     </a>]
-    Sort by: <select id="order-ctrl" size="1"><option value="alt"> Creation date</option><option value="alt"> Last reply</option><option value="alt"> Reply Count</option></select>
+    Sort by:    <select id="order-ctrl" size="1" onchange="changeOrder()">
+                    <option value="creation_date"{% if current_sort == 'creation_date' %}selected{% endif %}
+                    >Creation date</option>
+                    <option value="last_reply"{% if current_sort == 'last_reply' %}selected{% endif %}
+                    >Last reply</option>
+                    <option value="reply_count"{% if current_sort == 'reply_count' %}selected{% endif %}
+                    >Reply Count</option>
+                </select>
 {% endblock thread_section_menu %}
 {% block thread_section %}
+{% block custom_js%}
+    <script>
+        function changeOrder() {
+            const sortOption = document.getElementById('order-ctrl').value;
+            window.location.href = `{% url 'board_page_cat' board.name %}?order_by=${sortOption}`;
+        }
+    </script>
+{% endblock custom_js%}
     <div class="thread-section">
         {% for thread in threads %}
             <div class="thread">

@@ -1,6 +1,6 @@
 # views.py
 from django.shortcuts import render,redirect,get_object_or_404
-from django.db.models import Count,Q
+from django.db.models import Count,Max
 from .models import Board,Thread,Post
 from .forms import *
 
@@ -11,7 +11,7 @@ def home(request): #view that returns a list of all the communities (Boards) pre
 def board_page_scroll(request, board_name):
     boards = Board.objects.all()
     board = Board.objects.get(name=board_name)
-    threads = Thread.objects.filter(board=board)
+    threads = Thread.objects.filter(board=board).order_by('-created_at')
 
     if request.method == 'POST':
         form = ThreadForm(request.POST, request.FILES)
@@ -35,11 +35,23 @@ def board_page_scroll(request, board_name):
 def board_page_catalog(request, board_name):
     boards = Board.objects.all()
     board = Board.objects.get(name=board_name)
+
+    order_by = request.GET.get('order_by', 'creation_date')
+
+    order_by_mapping = {
+        'last_reply': '-last_reply_date',
+        'reply_count': '-num_replies',
+    }
+
+    default_order_by = '-created_at'
+    selected_order_by = order_by_mapping.get(order_by, default_order_by)
+
     threads = Thread.objects.filter(board=board).annotate(
         num_replies=Count('posts'),
-        num_images=Count('posts__file_uploaded', distinct=True)
-    )
-
+        num_images=Count('posts__file_uploaded', distinct=True),
+        last_reply_date=Max('posts__created_at')
+    ).order_by(selected_order_by)
+    
     if request.method == 'POST':
         form = ThreadForm(request.POST, request.FILES)
         if form.is_valid():
@@ -55,6 +67,7 @@ def board_page_catalog(request, board_name):
         'board': board,
         'threads': threads,
         'form': form,
+        'current_sort': order_by, 
     }
 
     return render(request, 'core/board_page_catalog.html', context)
@@ -63,7 +76,6 @@ def single_thread(request, board_name ,thread_id):
     boards = Board.objects.all()
     board = Board.objects.get(name=board_name)
     thread = get_object_or_404(Thread, id=thread_id)
-    posts = Post.objects.filter(thread=thread)
 
     if request.method == 'POST':
         form = PostForm(request.POST, request.FILES)
@@ -79,7 +91,6 @@ def single_thread(request, board_name ,thread_id):
         'boards': boards,
         'board': board,
         'thread': thread,
-        'posts': posts,
         'form': form,
     }
     return render(request,'core/board_page_single.html',context)
