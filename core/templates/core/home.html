@@ -1,67 +1,52 @@
 {% extends 'base.html' %}
-{% load static %}<!--to load logo-->
+{% load static %}
 
-{% block home_style%}
-<style>
-    .container {
-        display: grid;
-        grid-template-columns: 1fr; 
-        gap: 10px;
-        padding: 10px;
-        margin: auto;
-        max-width: 600px; 
-    }
-
-    .box {
-        border: 1px solid #ccc;
-        border-color: #64b748;
-        margin-bottom: 20px;
-    }
-
-    .box-bar {
-        color: #27233a;
-        background-color: #64b748;
-        margin: 0;
-        padding: 10px;
-        font-weight: bold;
-    }
-
-    .box-text {
-        margin: 15px; 
-    }
-</style>
-{% endblock home_style%}
+{% block home_style %}
+    <link rel="stylesheet" type="text/css" href="{% static 'core/home.css' %}">
+{% endblock home_style %}
 
 {% block page_content %}
-<div class="container">
-    <img src="{% static 'core/DjangoChan.svg' %}" alt="DjangoChanLogo">
-    <div class="box">
-        <div class="box-bar">What is DjangoChan?</div>
-        <div class="box-text">
-            DjangoChan is a simple image-based bulletin board where anyone can post comments and share images.
-            Its aim is to be a *chan webapp with a modern look and feel but I'm clearly failing so I'll try <br>
-            to have it be at least a functional prototype first lol.
-        </div>
-    </div>
+   
 
-    <div class="box">
-        <div class="box-bar">Boards:</div>
-        <div class="box-text">
-        {% for board in boards %}
-        <!--It would probably make more sense to add them hardcoded to keep them more organized-->
-            <a href="{% url 'board_page' board.name %}">{{ board.name }}</a><br>
-        {% endfor %}
-        </div>
-    </div>
+    <div class="container">
+        <header>
+            <img src="{% static 'core/DjangoChan.svg' %}" alt="DjangoChanLogo">
+        </header>
+        <section class="about">
+            <div class="box">
+                <div class="box-bar">What is DjangoChan?</div>
+                <div class="box-text">
+                    DjangoChan is a simple image-based bulletin board where anyone can post comments and share images.
+                    Its aim is to be a *chan web app with a modern look and feel. However, I'm clearly failing, so I'll try
+                    to have it be at least a functional prototype first.
+                </div>
+            </div>
+        </section>
 
-    <div class="box">
-        <div class="box-bar">Popular threads:</div>
-        Ancora da implementare
-    </div>  
-    
-    <div class="box">
-        <div class="box-bar">Stats(Da implementare)</div>
-        <div clas="box-text">Total Threads & Posts created:123  Active Content: 15GB</div>
-    </div>              
-</div>
+        <section class="boards">
+            <div class="box">
+                <div class="box-bar">Boards:</div>
+                <div class="box-text">
+                    {% for board in boards %}
+                        <a href="{% url 'board_page' board.name %}">{{ board.name }}</a><br>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+
+        <section class="popular-threads">
+            <div class="box">
+                <div class="box-bar">Popular threads:</div>
+                <div class="box-text">To be implemented</div>
+            </div>
+        </section>
+
+        <section class="stats">
+            <div class="box">
+                <div class="box-bar">Stats (To be implemented)</div>
+                <div class="box-text">Total Threads & Posts created: 123  Active Content: 15GB</div>
+            </div>
+        </section>
+    </main>
 {% endblock page_content %}
+
