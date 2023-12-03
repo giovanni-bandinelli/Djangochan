@@ -1,17 +1,8 @@
+{% load static %}
 
-<style>
-    .thread_form_post{
-        margin-left:auto;
-        margin-right:auto;
-        max-width: 100vh;
-        min-width: 33%;
-    }
-    .error-message {
-        color: red;
-    }
-</style>
+<link rel="stylesheet" type="text/css" href="{% static 'core/form.css' %}">
 
-<form method="post" enctype="multipart/form-data" class="thread_form_post">
+<form method="post" enctype="multipart/form-data" class="new_form" id="new_post_form">
     <h2>Add Reply to thread No.{{thread.id}}</h2>
     {% csrf_token %}
     <table>
