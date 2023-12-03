@@ -7,21 +7,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
     <title>{% block title %}DjangoChan{% endblock title %}</title>
-    <style>
-        body {
-            font-family: "Roboto",arial,helvetica,sans-serif;
-            color: #e5e5e5;
-            background-color: #1D1F21;
-            box-sizing: border-box;
-        }
-        a{
-            color: #64b748;
-        }
-        a:hover{
-            color: #FFE37A;
-        }
-    </style>
     {% block home_style%}
     {% endblock home_style%}<!--this solution is in way the recommended approach bruh-->
     {% block board_layout_style%}<!--this solution is in way the recommended approach bruh-->
