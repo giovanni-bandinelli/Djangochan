@@ -4,9 +4,7 @@
 # .gitignore
 
 #***to use only in development mode***
-#Ignore static files, needed to store css,and images used by the website(favicons,logos etc)
-/static/
-/core/static/               
+#Ignore static files, needed to store css,and images used by the website(favicons,logos etc)               
 #ignore media, stores user uploaded files should be created automatically when succesfully starting a new Thread or adding a Post
 /uploads/
 
