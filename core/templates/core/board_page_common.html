@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block board_layout_style%}
+{% endblock board_layout_style%}
+
+{% block page_content %}
+    <header>
+        {% include "./navbar.html" %}
+    </header>
+    {% block form_section %}
+        {% include "./thread_form.html" %}
+        <hr>
+    {% endblock form_section %}
+
+    {% block thread_section_menu %}
+    {% endblock thread_section_menu %}
+    <hr>
+
+    {% block thread_section %}
+        {% block custom_js %}
+
+        {% endblock custom_js %}
+
+    {% endblock thread_section %}
+{% endblock page_content %}
