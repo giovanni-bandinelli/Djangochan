@@ -65,10 +65,10 @@ A list of missing features etc from the moment I wrote this README
    - [ ] Implement draggable reply form
    - [ ] Polish the look and feel of the standard webapp, make it more responsive
    - [ ] Implement a mobile friendly version
-   - [ ] Deconstruct the spaghetti code that is the frontend side of the application, organize it better
+   - [x] Deconstruct the spaghetti code that is the frontend side of the application, organize it better
 
 ### Backend wise
-- [ ] Merge Thread and Post model so that they share the same ID
+- [x] Merge Thread and Post model so that they share the same ID
 - [ ] Add user model, both anonymous and logged (for admin and mods)
 
 I'll add more stuff going on.
