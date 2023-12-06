@@ -1,22 +1,22 @@
-{% for post in thread.posts.all %}
+{% for reply in thread.replies.all %}
     <div class="post-container">
         <div class="post">
-            {% if post.file_uploaded %}
+            {% if reply.file_uploaded %}
                 <div class="file">
                     <div class="media-container">
-                        <img class="media-image" src="{{ post.file_uploaded.url }}"
+                        <img class="media-image" src="{{ reply.file_uploaded.url }}"
                             onclick="toggleImage(this)" alt="Post Image">
                     </div>
                 </div>
             {% endif %}
             <div class="info">
-                
-                <span class="username">{{ post.username }}</span> 
-                <span class="timestamp">{{ post.created_at|date:"(D) d/m/Y H:i" }}</span>
-                <span class="quick_reply"><a href="{% url 'single_thread' board_name=board.name thread_id=thread.id %}">No.{{ post.id }}</a></span><br>
+                <span class="username">{{ reply.username }}</span> 
+                <span class="timestamp">{{ reply.created_at|date:"(D) d/m/Y H:i" }}</span>
+                <span class="quick_reply">[<a href="{% url 'single_thread' board.name thread.id %}">Reply</a>]</span>
+                <span class="quick_reply"><a href="{% url 'single_thread' board_name=board.name thread_id=thread.id %}">No.{{ reply.id }}</a></span><br>
             </div>
             <div class="content">
-                <p>{{ post.content }}</p>
+                <p>{{ reply.content }}</p>
             </div>
         </div>
     </div>

@@ -1,18 +1,11 @@
 from django import forms
-from .models import Thread, Post
+from .models import Post
 
 class ThreadForm(forms.ModelForm):
-    password_delete = forms.CharField(widget=forms.PasswordInput, required=False)#actually useless rn
 
     class Meta:
-        model = Thread
-        fields = ['title', 'content', 'username', 'file_uploaded']
-
-    def clean_title(self):
-        title = self.cleaned_data['title']
-        if not title.strip():
-            raise forms.ValidationError("'Title' is a required field to create a new thread.")
-        return title
+        model = Post
+        fields = ['content', 'username', 'file_uploaded']
 
     def clean_username(self):
         username = self.cleaned_data['username']

@@ -8,15 +8,16 @@
             </div>
         </div>
         {% endif %}
-        <span class="title">{{ thread.title }}</span>
         <span class="username">{{ thread.username }}</span>
         <span class="timestamp"> date: {{ thread.created_at|date:"(D) d/m/Y H:i" }}</span>
+        <span class="quick_reply">[<a href="{% url 'single_thread' board.name thread.id %}">Reply</a>]</span>
         <span class="quick_reply"><a href="{% url 'single_thread' board.name thread.id %}">No.{{ thread.id }}</a></span>
+
         
     </div>
     <div class="content">
         <p>{{ thread.content }}</p>
-        {% if thread.posts.all %}
+        {% if thread.replies.all %}
             {% include "./thread_replies.html" %}
         {% endif %}
     </div>

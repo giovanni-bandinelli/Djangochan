@@ -35,7 +35,7 @@
                 <a href="{% url 'single_thread' board.name thread.id %}"><img class="thumbnail" src="{{ thread.file_uploaded.url }}" alt="Thread Thumbnail"></a>
                 {% endif %}
                 <div class="thread-stats" title="(R)eplies & (I)mages">R:<b>{{ thread.num_replies}}</b>    I:<b>{{thread.num_images}}</b></div>
-                <div class="teaser"><b>{{thread.title}}:</b>{{thread.content}}</div>
+                <div class="teaser">{{thread.content}}</div>
             </div>
         {% endfor %}
     </div>
