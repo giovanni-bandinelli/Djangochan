@@ -1,7 +1,7 @@
 # views.py
 from django.shortcuts import render,redirect,get_object_or_404
 from django.db.models import Count,Max
-from .models import Board,Thread,Post
+from .models import Board,Post
 from .forms import *
 
 def home(request): #view that returns a list of all the communities (Boards) present in the Website
@@ -11,7 +11,7 @@ def home(request): #view that returns a list of all the communities (Boards) pre
 def board_page_scroll(request, board_name):
     boards = Board.objects.all()
     board = Board.objects.get(name=board_name)
-    threads = Thread.objects.filter(board=board).order_by('-created_at')
+    threads = Post.objects.filter(board=board).order_by('-created_at')
 
     if request.method == 'POST':
         form = ThreadForm(request.POST, request.FILES)
@@ -19,7 +19,7 @@ def board_page_scroll(request, board_name):
             thread = form.save(commit=False)
             thread.board = board  
             thread.save()
-            return redirect('board_page', board_name=board_name)
+            return redirect('single_thread', board_name=board_name, thread_id=thread.id)
     else:
         form = ThreadForm()
 
@@ -46,10 +46,10 @@ def board_page_catalog(request, board_name):
     default_order_by = '-created_at'
     selected_order_by = order_by_mapping.get(order_by, default_order_by)
 
-    threads = Thread.objects.filter(board=board).annotate(
-        num_replies=Count('posts'),
-        num_images=Count('posts__file_uploaded', distinct=True),
-        last_reply_date=Max('posts__created_at')
+    threads = Post.objects.filter(board=board).annotate(
+        num_replies=Count('replies'),
+        num_images=Count('replies__file_uploaded', distinct=True),
+        last_reply_date=Max('replies__created_at')
     ).order_by(selected_order_by)
     
     if request.method == 'POST':
@@ -57,8 +57,10 @@ def board_page_catalog(request, board_name):
         if form.is_valid():
             thread = form.save(commit=False)
             thread.board = board
+            thread.is_op = True
             thread.save()
-            return redirect('board_page', board_name=board_name)
+            thread_id = thread.id
+            return redirect('single_thread', board_name=board_name, thread_id=thread_id)
     else:
         form = ThreadForm()
 
@@ -75,7 +77,7 @@ def board_page_catalog(request, board_name):
 def single_thread(request, board_name ,thread_id):
     boards = Board.objects.all()
     board = Board.objects.get(name=board_name)
-    thread = get_object_or_404(Thread, id=thread_id)
+    thread = get_object_or_404(Post, id=thread_id)
 
     if request.method == 'POST':
         form = PostForm(request.POST, request.FILES)
