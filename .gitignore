@@ -11,7 +11,7 @@
 # Ignore Django migration files, should be created automatically after running migrations for the first time
 core/migrations/
 # Virtual Environment
-vEnv/
+venv/
 
 # Python
 *.pyc
