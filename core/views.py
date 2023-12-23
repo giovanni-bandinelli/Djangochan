@@ -18,8 +18,10 @@ def board_page_scroll(request, board_name):
         if form.is_valid():
             thread = form.save(commit=False)
             thread.board = board  
+            thread.idcookie = request.idcookie  # Get the idcookie from the request's cookies
             thread.save()
-            return redirect('single_thread', board_name=board_name, thread_id=thread.id)
+            thread_id = thread.id
+            return redirect('single_thread', board_name=board_name, thread_id=thread_id)
     else:
         form = ThreadForm()
 
@@ -56,8 +58,8 @@ def board_page_catalog(request, board_name):
         form = ThreadForm(request.POST, request.FILES)
         if form.is_valid():
             thread = form.save(commit=False)
-            thread.board = board
-            thread.is_op = True
+            thread.board = board  
+            thread.idcookie = request.COOKIES['idcookie']  # Get the idcookie from the request's cookies
             thread.save()
             thread_id = thread.id
             return redirect('single_thread', board_name=board_name, thread_id=thread_id)
@@ -84,6 +86,7 @@ def single_thread(request, board_name ,thread_id):
         if form.is_valid():
             post = form.save(commit=False)
             post.thread = thread
+            post.idcookie = request.idcookie 
             post.save()
             return redirect('single_thread', board_name=board_name, thread_id=thread_id)
     else:

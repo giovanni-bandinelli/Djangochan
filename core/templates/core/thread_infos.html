@@ -1,4 +1,6 @@
-<div class="wrapper">
+<!-- thread_info -->
+{% load file_filters %}
+<div class="wrapper" id="thread-wrapper">
     <div class="info">
         {% if thread.file_uploaded %}
         <div class="file">
@@ -8,8 +10,11 @@
             </div>
         </div>
         {% endif %}
-        <span class="username">{{ thread.username }}</span>
-        <span class="timestamp"> date: {{ thread.created_at|date:"(D) d/m/Y H:i" }}</span>
+        <!-- If thread's idcookie equal user's, create delete button-->
+        <span class="delete-post-btn">[X]</span>
+
+        <span class="username">{{ thread.username }}{% if request.COOKIES.idcookie == reply.idcookie %} [You] {% endif %}</span>
+        <span class="timestamp">{{ thread.created_at|date:"(D) d/m/Y H:i" }}</span>
         <span class="quick_reply">[<a href="{% url 'single_thread' board.name thread.id %}">Reply</a>]</span>
         <span class="quick_reply"><a href="{% url 'single_thread' board.name thread.id %}">No.{{ thread.id }}</a></span>
 

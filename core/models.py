@@ -9,6 +9,7 @@ class Board(models.Model):
 
 class Post(models.Model):
     id = models.AutoField(primary_key=True)
+    idcookie = models.CharField(max_length=36)  # "Track" the actual user by cookie
     username = models.CharField(max_length=15, blank=True)
     content = models.TextField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
