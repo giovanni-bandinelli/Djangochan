@@ -1,3 +1,6 @@
+
+{% load static %}
+
 {% for reply in thread.replies.all %}
     <div class="post-container">
         <div class="post">
@@ -10,8 +13,13 @@
                 </div>
             {% endif %}
             <div class="info">
+                {% if user_idcookie == reply.idcookie %}
+                    <a href="{% url 'delete_post' reply.id %}" class="delete-btn" onclick="return confirm('Are you sure you want to delete this post?');">
+                    <img src="{% static 'core/delete.svg' %}" alt="Delete button" class="delete-btn"> 
+                    </a>
+                {% endif %}
                 <span class="username">{{ reply.username }}
-                {% if request.COOKIES.idcookie == reply.idcookie %}
+                {% if user_idcookie == reply.idcookie %}
                     [You]
                 {% elif thread.idcookie == reply.idcookie %}
                     [OP]

@@ -1,5 +1,6 @@
 # views.py
 from django.shortcuts import render,redirect,get_object_or_404
+from django.http import HttpResponseRedirect
 from django.db.models import Count,Max
 from .models import Board,Post
 from .forms import *
@@ -9,6 +10,7 @@ def home(request): #view that returns a list of all the communities (Boards) pre
     return render(request, 'core/home.html', {'boards':boards})
 
 def board_page_scroll(request, board_name):
+    user_idcookie = request.COOKIES['idcookie']
     boards = Board.objects.all()
     board = Board.objects.get(name=board_name)
     threads = Post.objects.filter(board=board).order_by('-created_at')
@@ -18,7 +20,7 @@ def board_page_scroll(request, board_name):
         if form.is_valid():
             thread = form.save(commit=False)
             thread.board = board  
-            thread.idcookie = request.idcookie  # Get the idcookie from the request's cookies
+            thread.idcookie = user_idcookie  
             thread.save()
             thread_id = thread.id
             return redirect('single_thread', board_name=board_name, thread_id=thread_id)
@@ -30,11 +32,13 @@ def board_page_scroll(request, board_name):
         'board': board,
         'threads': threads,
         'form': form,
+        'user_idcookie': user_idcookie,
     }
 
     return render(request, 'core/board_page_scroll.html', context)
 
 def board_page_catalog(request, board_name):
+    user_idcookie = request.COOKIES['idcookie']
     boards = Board.objects.all()
     board = Board.objects.get(name=board_name)
 
@@ -59,7 +63,7 @@ def board_page_catalog(request, board_name):
         if form.is_valid():
             thread = form.save(commit=False)
             thread.board = board  
-            thread.idcookie = request.COOKIES['idcookie']  # Get the idcookie from the request's cookies
+            thread.idcookie = user_idcookie # Get the idcookie from the request's cookies
             thread.save()
             thread_id = thread.id
             return redirect('single_thread', board_name=board_name, thread_id=thread_id)
@@ -72,11 +76,13 @@ def board_page_catalog(request, board_name):
         'threads': threads,
         'form': form,
         'current_sort': order_by, 
+        'user_idcookie': user_idcookie,
     }
 
     return render(request, 'core/board_page_catalog.html', context)
 
 def single_thread(request, board_name ,thread_id):
+    user_idcookie = request.COOKIES['idcookie']
     boards = Board.objects.all()
     board = Board.objects.get(name=board_name)
     thread = get_object_or_404(Post, id=thread_id)
@@ -86,7 +92,8 @@ def single_thread(request, board_name ,thread_id):
         if form.is_valid():
             post = form.save(commit=False)
             post.thread = thread
-            post.idcookie = request.idcookie 
+            user_idcookie = request.COOKIES['idcookie']
+            post.idcookie = user_idcookie
             post.save()
             return redirect('single_thread', board_name=board_name, thread_id=thread_id)
     else:
@@ -97,5 +104,12 @@ def single_thread(request, board_name ,thread_id):
         'board': board,
         'thread': thread,
         'form': form,
+        'user_idcookie': user_idcookie,
     }
     return render(request,'core/board_page_single.html',context)
+
+def delete_post(request, post_id):
+    post = get_object_or_404(Post, id=post_id)
+    if request.idcookie == post.idcookie:
+        post.delete()
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))

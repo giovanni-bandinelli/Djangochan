@@ -47,3 +47,11 @@
 .media-image.expanded {
     max-width: 80%;
 }
+.delete-btn{
+    width: 20px;
+    height: 20px;
+}
+
+.delete-btn:hover{
+    cursor: pointer;
+}
