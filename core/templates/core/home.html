@@ -28,7 +28,7 @@
                 <div class="box-bar">Boards:</div>
                 <div class="box-text">
                     {% for board in boards %}
-                        <a href="{% url 'board_page' board.name %}">{{ board.name }}</a><br>
+                        <ul><a href="{% url 'board_page_cat' board.name %}">{{board.name}}</a></ul>
                     {% endfor %}
                 </div>
             </div>
@@ -44,7 +44,7 @@
         <section class="stats">
             <div class="box">
                 <div class="box-bar">Stats (To be implemented)</div>
-                <div class="box-text">Total Threads & Posts created: 123  Active Content: 15GB</div>
+                <div class="box-text">Total Threads & Posts created: ...  Active Content: ...GB</div>
             </div>
         </section>
     </main>
