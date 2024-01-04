@@ -18,22 +18,29 @@ Go in whatever directory you want to download the repository and clone it with:
 ```bash
 git clone https://github.com/giovanni-bandinelli/DjangoChan.git
 ```
-**Note:** Some directories ( './static' at root level '.static/core' inside 'core' app) are specified in the `.gitignore` file and will not be included when you clone the repository
 
 2.**Create and activate a python virtual enviroment**
 
-I called mine 'vEnv', remember to change the .gitignore accordingly 
+Navigate to the Djangochan directory in your terminal and run the following commands:
+
+   **on Windows:**
+
 ```bash
-python -m venv vEnv
+python -m venv venv
+venv\Scripts\activate
 ```
+   **on Mac/Linux:**
+```bash
+python3 -m venv venv
+source venv/bin/activate
+```
+These commands create a Python virtual environment named 'venv' and activate it, necessary for the next step.
 
 3.**Add requirements**
 ```bash
-pip3 install -r requirements.txt
+pip install -r requirements.txt
 ```
-**important**
-I'm using postgres as my DBMS so you should either install it (if it's not already present on your machine) and create a database matching the infos inside the 'DATABASE = {}' section
-in settings.py or tweak them to fit your needs, even changing DBMS should go fairly smooth i'm pretty sure.
+This ensures that all project dependencies are installed in the virtual environment.
 
 4.**Run migrations**
 ```bash
@@ -47,7 +54,21 @@ After completing the installation,open a terminal inside of the project's direct
 ```bash
 python manage.py runserver
 ```
-et voilà
+
+This is what you should see:
+
+![empty homepage](.\docs\readme_images\qwerty.png)
+(notice how the url is something like http://127.0.0.1:8000)
+
+If you want to create boards, you'll need to enter Django's admin interface, but first you have to create a superuser with
+
+```bash
+python manage.py createsuperuser
+```
+enter whatever username and password you want.
+With that done, navigate to your local development server (http://127.0.0.1:8000 in my example) and add `/admin` to enter the admin interface, log in using your superuser's credentials.
+From there on the column on the left you'll be able to manage all the models of the project (board and post), the Board model as of right now has an useless yet required "Description" field, I'll clean it up in the future lol.
+et voilà, going back to the homepage you should be able to see the list of boards that you have added to the database.
 
 **reminder**
 
