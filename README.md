@@ -18,7 +18,6 @@ Go in whatever directory you want to download the repository and clone it with:
 ```bash
 git clone https://github.com/giovanni-bandinelli/DjangoChan.git
 ```
-**Note:** Some directories ( './static' at root level '.static/core' inside 'core' app) are specified in the `.gitignore` file and will not be included when you clone the repository
 
 2.**Create and activate a python virtual enviroment**
 
@@ -35,7 +34,7 @@ venv\Scripts\activate
 python3 -m venv venv
 source venv/bin/activate
 ```
-These commands create a Python virtual environment named 'venv' and activate it.
+These commands create a Python virtual environment named 'venv' and activate it, necessary for the next step.
 
 3.**Add requirements**
 ```bash
