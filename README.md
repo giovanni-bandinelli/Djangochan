@@ -22,9 +22,9 @@ git clone https://github.com/giovanni-bandinelli/DjangoChan.git
 
 2.**Create and activate a python virtual enviroment**
 
-Go inside the Djangochan directory then run:
+Navigate to the Djangochan directory in your terminal and run the following commands:
 
-   **on Windows**
+   **on Windows:**
 
 ```bash
 python -m venv venv
@@ -35,10 +35,13 @@ venv\Scripts\activate
 python3 -m venv venv
 source venv/bin/activate
 ```
+These commands create a Python virtual environment named 'venv' and activate it.
+
 3.**Add requirements**
 ```bash
-pip3 install -r requirements.txt
+pip install -r requirements.txt
 ```
+This ensures that all project dependencies are installed in the virtual environment.
 
 4.**Run migrations**
 ```bash
