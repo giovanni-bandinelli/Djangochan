@@ -54,7 +54,21 @@ After completing the installation,open a terminal inside of the project's direct
 ```bash
 python manage.py runserver
 ```
-et voilà
+
+This is what you should see:
+
+![empty homepage](.\docs\readme_images\qwerty.png)
+(notice how the url is something like http://127.0.0.1:8000)
+
+If you want to create boards, you'll need to enter Django's admin interface, but first you have to create a superuser with
+
+```bash
+python manage.py createsuperuser
+```
+enter whatever username and password you want.
+With that done, navigate to your local development server (http://127.0.0.1:8000 in my example) and add `/admin` to enter the admin interface, log in using your superuser's credentials.
+From there on the column on the left you'll be able to manage all the models of the project (board and post), the Board model as of right now has an useless yet required "Description" field, I'll clean it up in the future lol.
+et voilà, going back to the homepage you should be able to see the list of boards that you have added to the database.
 
 **reminder**
 
