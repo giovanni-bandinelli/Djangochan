@@ -21,13 +21,16 @@ git clone https://github.com/giovanni-bandinelli/DjangoChan.git
 **Note:** Some directories ( './static' at root level '.static/core' inside 'core' app) are specified in the `.gitignore` file and will not be included when you clone the repository
 
 2.**Create and activate a python virtual enviroment**
+
 Go inside the Djangochan directory then run:
-##on Windows
+
+   **on Windows**
+
 ```bash
 python -m venv venv
 venv\Scripts\activate
 ```
-##on Mac/Linux:
+   **on Mac/Linux:**
 ```bash
 python3 -m venv venv
 source venv/bin/activate
