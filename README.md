@@ -63,7 +63,6 @@ This is what you should see:
 If you want to create boards, you'll need to enter Django's admin interface, but first you have to create a superuser with
 
 ```bashUser
-ok but lets start with something even easier, by default on form submission text if i go to a new line that doesnt happen in the result
 python manage.py createsuperuser
 ```
 enter whatever username and password you want.
