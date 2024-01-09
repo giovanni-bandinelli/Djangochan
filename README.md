@@ -57,12 +57,13 @@ python manage.py runserver
 
 This is what you should see:
 
-![empty homepage](.\docs\readme_images\qwerty.png)
+![empty homepage](docs/readme_images/qwerty.png)
 (notice how the url is something like http://127.0.0.1:8000)
 
 If you want to create boards, you'll need to enter Django's admin interface, but first you have to create a superuser with
 
-```bash
+```bashUser
+ok but lets start with something even easier, by default on form submission text if i go to a new line that doesnt happen in the result
 python manage.py createsuperuser
 ```
 enter whatever username and password you want.
