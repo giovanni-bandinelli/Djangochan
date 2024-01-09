@@ -55,3 +55,16 @@
 .delete-btn:hover{
     cursor: pointer;
 }
+
+.spoiler{
+    background-color: #000;
+    color: #000;
+}
+.spoiler:hover{
+    background-color: #000;
+    color: #fff;
+}
+
+.greentxt{
+    color: #789922;
+}

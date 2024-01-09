@@ -30,7 +30,7 @@
                 <span class="quick_reply"><a href="{% url 'single_thread' board_name=board.name thread_id=thread.id %}">No.{{ reply.id }}</a></span><br>
             </div>
             <div class="content">
-                <p>{{ reply.content }}</p>
+                <p>{{ reply.content|safe }}</p>
             </div>
         </div>
     </div>

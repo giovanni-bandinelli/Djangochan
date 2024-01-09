@@ -1,6 +1,5 @@
 <!-- thread_info -->
 {% load static %}
-{% load file_filters %}
 <div class="wrapper" id="thread-wrapper">
     <div class="info">
         {% if thread.file_uploaded %}
@@ -26,7 +25,7 @@
         
     </div>
     <div class="content">
-        <p>{{ thread.content }}</p>
+        <p>{{ thread.content|safe }}</p>
         {% if thread.replies.all %}
             {% include "./thread_replies.html" %}
         {% endif %}
