@@ -7,20 +7,13 @@
     {% csrf_token %}
     <table>
         <tr>
-            <td><label for="{{ form.username.id_for_label }}">Username:</label></td>
+            <td><label for="{{ form.username.id_for_label }}" placeholder="Anonymous">Username:</label></td>
             <td>{{ form.username }}</td>
-        </tr>
-        <tr>
-            <td><label for="{{ form.title.id_for_label }}">Title:</label></td>
-            <td>{{ form.title }} <input type="submit" value="Post"></td></td> <td colspan="2">
+            <td><input type="submit" value="Post"></td>
         </tr>
         <tr>
             <td><label for="{{ form.content.id_for_label }}">Comment:</label></td>
             <td>{{ form.content }}</td>
-        </tr>
-        <tr>
-            <td><label for="{{ form.password.id_for_label }}">Password:</label></td>
-            <td>{{ form.password }}</td>
         </tr>
         <tr>
           <td><label for="{{ form.file_uploaded.id_for_label }}">File:</label></td>
