@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block home_style %}
+    <link rel="stylesheet" type="text/css" href="{% static 'core/home.css' %}">
+{% endblock home_style %}
+
+{% block page_content %}
+   
+
+    <div class="container">
+        <header>
+            <img src="{% static 'core/DjangoChan.svg' %}" alt="DjangoChanLogo">
+        </header>
+        <section class="about">
+            <div class="box">
+                <div class="box-bar">Error 404:</div>
+                <div class="box-text">
+                    <img src="{% static 'core/notFound.jpeg' %}" alt="Not Found" style="width: 100%; height: auto;">
+                </div>
+            </div>
+        </section>
+        <a href="/" class="go-back-button">[Go back]</a>
+        
+    </div>
+{% endblock page_content %}
