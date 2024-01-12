@@ -9,3 +9,4 @@ urlpatterns = [
     path('delete_post/<int:post_id>/', delete_post, name='delete_post'),
 ]
 
+handler404 = 'core.views.page404'
