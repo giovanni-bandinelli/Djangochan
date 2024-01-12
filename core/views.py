@@ -9,6 +9,9 @@ def home(request): #view that returns a list of all the communities (Boards) pre
     boards = Board.objects.all()
     return render(request, 'core/home.html', {'boards':boards})
 
+def page404(request, exception):
+    return render(request, 'core/error404.html', status=404)
+
 def board_page_scroll(request, board_name):
     user_idcookie = request.COOKIES['idcookie']
     boards = Board.objects.all()
@@ -21,6 +24,9 @@ def board_page_scroll(request, board_name):
             thread = form.save(commit=False)
             thread.board = board  
             thread.idcookie = user_idcookie  
+            content = form.cleaned_data.get('content') # Extract cleaned content, parse it, save it
+            content = markdown_parser(content, board_name ,None)
+            thread.content = content
             thread.save()
             thread_id = thread.id
             return redirect('single_thread', board_name=board_name, thread_id=thread_id)
@@ -64,6 +70,9 @@ def board_page_catalog(request, board_name):
             thread = form.save(commit=False)
             thread.board = board  
             thread.idcookie = user_idcookie # Get the idcookie from the request's cookies
+            content = form.cleaned_data.get('content') # Extract cleaned content, parse it, save it
+            content = markdown_parser(content,board_name, None)
+            thread.content = content
             thread.save()
             thread_id = thread.id
             return redirect('single_thread', board_name=board_name, thread_id=thread_id)
@@ -94,6 +103,9 @@ def single_thread(request, board_name ,thread_id):
             post.thread = thread
             user_idcookie = request.COOKIES['idcookie']
             post.idcookie = user_idcookie
+            content = form.cleaned_data.get('content') # Extract cleaned content, parse it, save it
+            content = markdown_parser(content,board_name, thread_id)
+            post.content = content
             post.save()
             return redirect('single_thread', board_name=board_name, thread_id=thread_id)
     else:

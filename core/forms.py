@@ -21,9 +21,6 @@ class ThreadForm(forms.ModelForm):
         content_length = len(content)
         if content_length > 2000:
             raise forms.ValidationError(f"Your comment is too long. Please keep it under 2000 characters. (currently {content_length})")
-        
-        # Parse the content
-        content = markdown_parser(content)
 
         return content
 
@@ -49,6 +46,7 @@ class PostForm(forms.ModelForm):
             username = "Anonymous"
         if not username.isalnum():
             raise forms.ValidationError("Username can only contain letters and numbers.")
+        
         return username
 
     def clean_content(self):
@@ -58,11 +56,8 @@ class PostForm(forms.ModelForm):
             raise forms.ValidationError("A reply can't have an empty comment")
         if content_length > 2000:
             raise forms.ValidationError(f"Your comment is too long. Please keep it under 2000 characters. (currently {content_length})")
-        
-        # Parse the content
-        content = markdown_parser(content)
         return content
-
+    
     def clean_file_uploaded(self):
         file_uploaded = self.cleaned_data['file_uploaded']
         if file_uploaded and file_uploaded.size > 10 * 1024 * 1024:
